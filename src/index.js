@@ -44,8 +44,16 @@ function renderCharacter(character) {
   //add votes
   characterVotesForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    let votes = parseInt(characterVotes.textContent) + 1;
-    characterVotes.textContent = votes;
+
+    characterVotes.textContent =
+      parseInt(characterVotes.textContent) +
+      parseInt(characterVotesFormInput.value);
+    characterVotesForm.reset();
+  });
+
+  //reset votes
+  characterVotesReset.addEventListener("click", (e) => {
+    characterVotes.textContent = 0;
   });
 }
 
