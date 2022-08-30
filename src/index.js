@@ -1,12 +1,16 @@
 // Your code here
 /* targets */
 const charactersBar = document.querySelector("#character-bar");
-const characterName = document.querySelector("#name")
+const characterName = document.querySelector("#detailed-info #name");
 const characterImage = document.querySelector("#image");
 const characterVotes = document.querySelector("#vote-count");
 const characterVotesForm = document.querySelector("#votes-form");
 const characterVotesFormInput = document.querySelector("#votes");
 const characterVotesReset = document.querySelector("#reset-btn");
+
+const addCharForm = document.querySelector("#character-form");
+const addCharName = document.querySelector("#character-form #name");
+const addCharImage = document.querySelector("#image-url");
 
 function fetchData(id = null) {
   const url = id
@@ -55,13 +59,39 @@ function renderCharacter(character) {
   characterVotesReset.addEventListener("click", (e) => {
     characterVotes.textContent = 0;
   });
+
+  //add character
+  const currentCharacters = document.querySelectorAll("#character-bar span");
+  addCharForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const newChar = {
+      name: addCharName.value,
+      image: `${addCharImage.value}`,
+      votes: 0,
+    };
+    fetch("http://localhost:3000/characters", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newChar),
+    })
+      .then((res) => res.json())
+      .then((newChars) => {
+        fetchData().then((characters) => {
+          renderCharacterBar(characters);
+        });
+        addCharForm.reset();
+      })
+      .catch((err) => console.log(newChar));
+  });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetchData(1).then(character=>{
-        renderCharacter(character)
-    })
-    fetchData().then((characters) => {
-      renderCharacterBar(characters);
-    });
-})
+document.addEventListener("DOMContentLoaded", () => {
+  fetchData(1).then((character) => {
+    renderCharacter(character);
+  });
+  fetchData().then((characters) => {
+    renderCharacterBar(characters);
+  });
+});

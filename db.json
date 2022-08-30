@@ -29,6 +29,12 @@
       "name": "Mme. Panda",
       "image": "https://media.giphy.com/media/ALalVMOVR8Qw/giphy.gif",
       "votes": 0
+    },
+    {
+      "name": "drop",
+      "image": "https://thumbs.gfycat.com/BelovedSarcasticGallowaycow.webp",
+      "votes": 0,
+      "id": 6
     }
   ]
 }
