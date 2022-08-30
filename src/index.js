@@ -25,6 +25,11 @@ function renderCharacterBar(characters) {
     const mySpan = document.createElement("span");
     mySpan.textContent = character.name;
     mySpan.id = character.id;
+    mySpan.addEventListener("click", () => {
+      fetchData(character.id).then((character) => {
+        renderCharacter(character);
+      });
+    });
     charactersBar.appendChild(mySpan);
   });
 }
