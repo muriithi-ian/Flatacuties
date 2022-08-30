@@ -37,9 +37,16 @@ function renderCharacterBar(characters) {
 function renderCharacter(character) {
   //data render
   characterName.textContent = character.name;
-    characterImage.src = character.image;
-    characterImage.alt = character.name;
-    characterVotes.textContent = character.votes;
+  characterImage.src = character.image;
+  characterImage.alt = character.name;
+  characterVotes.textContent = character.votes;
+
+  //add votes
+  characterVotesForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let votes = parseInt(characterVotes.textContent) + 1;
+    characterVotes.textContent = votes;
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
