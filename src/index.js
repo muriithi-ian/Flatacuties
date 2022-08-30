@@ -18,8 +18,15 @@ function fetchData(id = null) {
 }
 
 function renderCharacterBar(characters) {
-    
-
+  //remove placeholders
+  charactersBar.textContent = "";
+  //render characters
+  characters.forEach((character) => {
+    const mySpan = document.createElement("span");
+    mySpan.textContent = character.name;
+    mySpan.id = character.id;
+    charactersBar.appendChild(mySpan);
+  });
 }
 
 function renderCharacter(character) {
@@ -34,4 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData(1).then(character=>{
         renderCharacter(character)
     })
+    fetchData().then((characters) => {
+      renderCharacterBar(characters);
+    });
 })
